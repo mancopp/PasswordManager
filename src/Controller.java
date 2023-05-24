@@ -21,9 +21,13 @@ public class Controller {
         view.addRegBackButtonListener(new RegBackButtonListener());
 
         view.passwordListCard.addListSelectionListener(new PasswordListPanelListSelectionListener());
+
         view.passwordViewCard.addCopyButtonListener(new CopyActionListener());
         view.passwordViewCard.addPasswordToggleButtonListener(new PasswordViewToggleButtonListener());
-        view.passwordViewCard.addBackButtonListener(new BackButtonListener());
+        view.passwordViewCard.addBackButtonListener(new ViewPanelBackButtonListener());
+        view.passwordViewCard.addHistoryButtonListener(new HistoryButtonListener());
+
+        view.passwordHistoryCard.addBackButtonListener(new HistoryPanelBackButtonListener());
 
         view.showLogin();
     }
@@ -70,10 +74,24 @@ public class Controller {
         }
     }
 
-    private class BackButtonListener implements ActionListener {
+    private class HistoryButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.showPasswordHistory(model.getPasswordSession());
+        }
+    }
+
+    private class ViewPanelBackButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.showPasswordList(model.getUserSession());
+        }
+    }
+
+    private class HistoryPanelBackButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.showPasswordView(model.getPasswordSession());
         }
     }
 

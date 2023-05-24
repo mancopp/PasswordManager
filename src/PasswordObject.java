@@ -9,8 +9,17 @@ class PasswordObject implements Serializable {
     private String password;
     private Date dateCreated;
 
-    // List of dates used and possibility to check use history
+    public List<Date> getUsedDates() {
+        return usedDates;
+    }
+
     private List<Date> usedDates;
+
+    public Date getLastUsed() {
+        return lastUsed;
+    }
+
+    private Date lastUsed;
     private int timesUsed;
 
     public PasswordObject(String label, String username, String password) {
@@ -43,7 +52,9 @@ class PasswordObject implements Serializable {
     }
 
     public void incrementTimesUsed() {
+        Date date = new Date();
         timesUsed++;
-        usedDates.add(new Date());
+        usedDates.add(date);
+        lastUsed = date;
     }
 }

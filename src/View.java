@@ -18,6 +18,7 @@ public class View {
     private CardLayout cardLayout = new CardLayout();
     public PasswordViewPanel passwordViewCard = new PasswordViewPanel();
     public PasswordListPanel passwordListCard = new PasswordListPanel();
+    public PasswordHistoryPanel passwordHistoryCard = new PasswordHistoryPanel();
 
     public View() {
         frame = new JFrame("Login");
@@ -63,6 +64,7 @@ public class View {
         cards.add(registerCard, "register");
         cards.add(passwordListCard, "passwordList");
         cards.add(passwordViewCard, "passwordView");
+        cards.add(passwordHistoryCard, "passwordHistory");
 
         frame.getContentPane().add(cards);
         frame.pack();
@@ -109,6 +111,10 @@ public class View {
     public void showPasswordView(PasswordObject data) {
         passwordViewCard.setData(data);
         cardLayout.show(cards, "passwordView");
+    }
+    public void showPasswordHistory(PasswordObject data) {
+        passwordHistoryCard.setData(data.getUsedDates());
+        cardLayout.show(cards, "passwordHistory");
     }
 
     public void showRegistrationForm() {

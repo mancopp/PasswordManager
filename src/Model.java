@@ -15,11 +15,11 @@ public class Model {
     private User userSession;
 
     public PasswordObject getPasswordSession() {
-        passwordSession.incrementTimesUsed();
         return passwordSession;
     }
 
     public void setPasswordSession(PasswordObject passwordSession) {
+        passwordSession.incrementTimesUsed();
         this.passwordSession = passwordSession;
     }
 

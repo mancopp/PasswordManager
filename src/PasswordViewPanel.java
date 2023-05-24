@@ -1,12 +1,11 @@
 import javax.swing.*;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 public class PasswordViewPanel extends JPanel {
     private final char ECHO_CHAR = '\u2022';
+    private JButton historyButton;
+    private JLabel timesUsed;
     private JButton backButton;
     private JButton editButton;
     private JLabel label;
@@ -71,6 +70,14 @@ public class PasswordViewPanel extends JPanel {
         contentRow3Panel.add(buttonPanel, BorderLayout.EAST);
         contentPanel.add(contentRow3Panel, gbc);
 
+        timesUsed = new JLabel();
+        historyButton = new JButton("History");
+        JPanel contentRow4Panel = new JPanel(new BorderLayout());
+        contentRow4Panel.add(new JLabel("Times used:"), BorderLayout.WEST);
+        contentRow4Panel.add(timesUsed, BorderLayout.CENTER);
+        contentRow4Panel.add(historyButton, BorderLayout.EAST);
+        contentPanel.add(contentRow4Panel, gbc);
+
         add(topPanel, BorderLayout.NORTH);
         add(contentPanel, BorderLayout.CENTER);
     }
@@ -80,6 +87,7 @@ public class PasswordViewPanel extends JPanel {
         label.setText(password.getLabel());
         username.setText(password.getUsername());
         passwordField.setText(password.getPassword());
+        timesUsed.setText(String.valueOf(password.getTimesUsed()));
 
         passwordField.setEchoChar(ECHO_CHAR);
         passwordToggleButton.setSelected(false);
@@ -111,5 +119,9 @@ public class PasswordViewPanel extends JPanel {
 
     public void addBackButtonListener(ActionListener listener) {
         backButton.addActionListener(listener);
+    }
+
+    public void addHistoryButtonListener(ActionListener listener) {
+        historyButton.addActionListener(listener);
     }
 }
