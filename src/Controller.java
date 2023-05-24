@@ -1,23 +1,29 @@
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Controller {
     private Model model;
     private View view;
-    private User user;
 
     public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
 
-        view.addPasswordListPanelListSelectionListener(new PasswordListPanelListSelectionListener());
         view.addLoginButtonListener(new LoginButtonListener());
         view.addRegisterButtonListener(new RegisterButtonListener());
         view.addRegRegisterButtonListener(new RegRegisterButtonListener());
         view.addRegBackButtonListener(new RegBackButtonListener());
+
+        view.passwordListCard.addListSelectionListener(new PasswordListPanelListSelectionListener());
+        view.passwordViewCard.addCopyButtonListener(new CopyActionListener());
+        view.passwordViewCard.addPasswordToggleButtonListener(new PasswordViewToggleButtonListener());
+        view.passwordViewCard.addBackButtonListener(new BackButtonListener());
 
         view.showLogin();
     }
@@ -34,9 +40,8 @@ public class Controller {
 
                     if (selectedIndex != -1) {
                         Object selectedData = list.getSelectedValue();
-                        PasswordObject passwordObject = user.getPasswordByLabel((String) selectedData);
-                        view.showPasswordView(passwordObject);
-                        // Process the selected data as needed
+                        model.setPasswordSession(model.getUserSession().getPasswordByLabel((String) selectedData));
+                        view.showPasswordView(model.getPasswordSession());
                     }
                 }
             }
@@ -50,8 +55,8 @@ public class Controller {
             String password = view.getPassword();
 
             if (model.authenticateUser(username, password)) {
-                user = model.getUserByUsername(username);
-                view.showPasswordList(user);
+                model.setUserSession(model.getUserByUsername(username));
+                view.showPasswordList(model.getUserSession());
             } else {
                 view.showErrorMessage("Invalid username or password");
             }
@@ -62,6 +67,35 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.showRegistrationForm();
+        }
+    }
+
+    private class BackButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.showPasswordList(model.getUserSession());
+        }
+    }
+
+    private class CopyActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String text = null;
+            JButton sourceButton = (JButton) e.getSource();
+
+            if (sourceButton == view.getCopyPasswordButton()) {
+                text = model.getPasswordSession().getPassword();
+            } else if (sourceButton == view.getCopyUsernameButton()) {
+                text = model.getPasswordSession().getUsername();
+            }
+            copyStringToClipboard(text);
+        }
+    }
+
+    private class PasswordViewToggleButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.passwordViewCard.handleToggleButtonPressed();
         }
     }
 
@@ -90,5 +124,12 @@ public class Controller {
             View view = new View();
             Controller controller = new Controller(model, view);
         });
+    }
+
+    private void copyStringToClipboard(String content) {
+        StringSelection selection = new StringSelection(content);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(selection, null);
+        view.showErrorMessage("Copied to clipboard.");
     }
 }

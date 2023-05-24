@@ -85,10 +85,6 @@ public class View {
         return new String(regPasswordField.getPassword());
     }
 
-    public void addPasswordListPanelListSelectionListener(ListSelectionListener listener){
-        passwordListCard.setListSelectionListener(listener);
-    }
-
     public void addLoginButtonListener(ActionListener listener) {
         loginButton.addActionListener(listener);
     }
@@ -125,5 +121,13 @@ public class View {
 
     public void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public JButton getCopyPasswordButton() {
+        return passwordViewCard.getPasswordCopyButton();
+    }
+
+    public JButton getCopyUsernameButton() {
+        return passwordViewCard.getUsernameCopyButton();
     }
 }

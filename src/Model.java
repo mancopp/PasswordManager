@@ -4,6 +4,27 @@ import java.util.List;
 public class Model {
     private List<User> userList;
 
+    public User getUserSession() {
+        return userSession;
+    }
+
+    public void setUserSession(User userSession) {
+        this.userSession = userSession;
+    }
+
+    private User userSession;
+
+    public PasswordObject getPasswordSession() {
+        passwordSession.incrementTimesUsed();
+        return passwordSession;
+    }
+
+    public void setPasswordSession(PasswordObject passwordSession) {
+        this.passwordSession = passwordSession;
+    }
+
+    private PasswordObject passwordSession;
+
     public Model() {
         userList = new ArrayList<>();
         User usr = new User("mncpp", "test");

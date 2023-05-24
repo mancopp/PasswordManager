@@ -11,7 +11,7 @@ public class PasswordListPanel extends JPanel {
 
     public PasswordListPanel(){}
 
-    public void setListSelectionListener(ListSelectionListener listSelectionListener) {
+    public void addListSelectionListener(ListSelectionListener listSelectionListener) {
         this.listSelectionListener = listSelectionListener;
     }
 
