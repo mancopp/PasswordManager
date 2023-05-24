@@ -12,6 +12,23 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public void addPassword(String label, String username, String password){
+        passwords.put(label, new PasswordObject(label, username, password));
+    }
+
+    public PasswordObject getPasswordByLabel(String label) {
+        return passwords.get(label);
+    }
+
+
+    public boolean authenticate(String username, String password) {
+        return username.equals(this.username) && password.equals(this.password);
+    }
+
+    public Map<String, PasswordObject> getPasswords(){
+        return passwords;
+    }
+
     public String getUsername() {
         return username;
     }

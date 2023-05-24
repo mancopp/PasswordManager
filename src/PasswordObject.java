@@ -1,10 +1,15 @@
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 class PasswordObject implements Serializable {
     private String label;
     private String username;
     private String password;
     private Date dateCreated;
+
+    // List of dates used and possibility to check use history
+    private List<Date> datesUsedList;
     private int timesUsed;
 
     public PasswordObject(String label, String username, String password) {
@@ -15,6 +20,10 @@ class PasswordObject implements Serializable {
         this.timesUsed = 0;
     }
 
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
     public String getLabel() {
         return label;
     }
@@ -23,13 +32,8 @@ class PasswordObject implements Serializable {
         return username;
     }
 
-    public String getPassword() {
-        timesUsed++;
+    public String getPassword(){
         return password;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
     }
 
     public int getTimesUsed() {
