@@ -58,5 +58,14 @@ public class Model {
         userList.add(user);
     }
 
+    public boolean isUserExists(String username) {
+        for (User user : userList) {
+            if (user.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Other methods for managing user data
 }

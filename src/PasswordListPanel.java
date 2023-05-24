@@ -20,7 +20,6 @@ public class PasswordListPanel extends JPanel {
         this.passwords = passwords;
         setLayout(new BorderLayout());
 
-        // Create the list model and JList
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for (String label : passwords.keySet()) {
             listModel.addElement(label);
@@ -28,13 +27,10 @@ public class PasswordListPanel extends JPanel {
         list = new JList<>(listModel);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        // Create the scroll pane and add the list to it
         JScrollPane scrollPane = new JScrollPane(list);
         scrollPane.setPreferredSize(new Dimension(200, 200));
 
-        // Add list selection listener to display the password
         list.addMouseListener(listDoubleClickListener);
-
 
         JButton button = new JButton("+");
 

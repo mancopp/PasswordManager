@@ -10,7 +10,6 @@ public class View {
     private JPasswordField passwordField;
     private JButton loginButton;
     private JButton registerButton;
-    private JPanel registerCard;
     private JTextField regUsernameField;
     private JPasswordField regPasswordField;
     private JButton regRegisterButton;
@@ -19,6 +18,7 @@ public class View {
     public PasswordViewPanel passwordViewCard = new PasswordViewPanel();
     public PasswordListPanel passwordListCard = new PasswordListPanel();
     public PasswordHistoryPanel passwordHistoryCard = new PasswordHistoryPanel();
+    public RegisterPanel registerCard = new RegisterPanel();
 
     public View() {
         frame = new JFrame("Login");
@@ -44,20 +44,20 @@ public class View {
         loginCard.add(registerButton);
 
         // Registration card
-        registerCard = new JPanel();
-        JLabel regUsernameLabel = new JLabel("Username:");
-        JLabel regPasswordLabel = new JLabel("Password:");
-        regUsernameField = new JTextField(10);
-        regPasswordField = new JPasswordField(10);
-        regRegisterButton = new JButton("Register");
-        regBackButton = new JButton("Back");
+//        registerCard = new JPanel();
+//        JLabel regUsernameLabel = new JLabel("Username:");
+//        JLabel regPasswordLabel = new JLabel("Password:");
+//        regUsernameField = new JTextField(10);
+//        regPasswordField = new JPasswordField(10);
+//        regRegisterButton = new JButton("Register");
+//        regBackButton = new JButton("Back");
 
-        registerCard.add(regUsernameLabel);
-        registerCard.add(regUsernameField);
-        registerCard.add(regPasswordLabel);
-        registerCard.add(regPasswordField);
-        registerCard.add(regRegisterButton);
-        registerCard.add(regBackButton);
+//        registerCard.add(regUsernameLabel);
+//        registerCard.add(regUsernameField);
+//        registerCard.add(regPasswordLabel);
+//        registerCard.add(regPasswordField);
+//        registerCard.add(regRegisterButton);
+//        registerCard.add(regBackButton);
 
         // Add cards to panel
         cards.add(loginCard, "login");
@@ -95,33 +95,30 @@ public class View {
         registerButton.addActionListener(listener);
     }
 
-    public void addRegRegisterButtonListener(ActionListener listener) {
-        regRegisterButton.addActionListener(listener);
-    }
-
-    public void addRegBackButtonListener(ActionListener listener) {
-        regBackButton.addActionListener(listener);
-    }
-
     public void showPasswordList(User data) {
+        frame.setTitle(data.getUsername() + "'s passwords");
         passwordListCard.setData(data);
         cardLayout.show(cards, "passwordList");
     }
 
     public void showPasswordView(PasswordObject data) {
+        frame.setTitle("Password data for \"" + data.getLabel() + "\"");
         passwordViewCard.setData(data);
         cardLayout.show(cards, "passwordView");
     }
     public void showPasswordHistory(PasswordObject data) {
+        frame.setTitle("Password History for \"" + data.getLabel() + "\"");
         passwordHistoryCard.setData(data.getUsedDates());
         cardLayout.show(cards, "passwordHistory");
     }
 
     public void showRegistrationForm() {
+        frame.setTitle("Register");
         cardLayout.show(cards, "register");
     }
 
     public void showLogin() {
+        frame.setTitle("Login");
         cardLayout.show(cards, "login");
     }
 
@@ -135,5 +132,9 @@ public class View {
 
     public JButton getCopyUsernameButton() {
         return passwordViewCard.getUsernameCopyButton();
+    }
+
+    public void showSuccessMessage(String message) {
+        JOptionPane.showMessageDialog(null, message, "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 }

@@ -17,8 +17,9 @@ public class Controller {
 
         view.addLoginButtonListener(new LoginButtonListener());
         view.addRegisterButtonListener(new RegisterButtonListener());
-        view.addRegRegisterButtonListener(new RegRegisterButtonListener());
-        view.addRegBackButtonListener(new RegBackButtonListener());
+
+        view.registerCard.addCancelButtonListener(new RegisterCancelButtonListener());
+        view.registerCard.addRegisterButtonListener(new RegisterRegisterButtonListener());
 
         view.passwordListCard.addListDoubleClickListener(new PasswordListPanelListDoubleClickListener());
 
@@ -71,6 +72,44 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.showRegistrationForm();
+        }
+    }
+    private class RegisterCancelButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.showLogin();
+        }
+    }
+    private class RegisterRegisterButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String username = view.registerCard.getUsernameField().getText();
+            String password = new String(view.registerCard.getPasswordField().getPassword());
+            String confirmPassword = new String(view.registerCard.getConfirmPasswordField().getPassword());
+
+            if (username.isEmpty()) {
+                view.showErrorMessage("Username is required");
+                return;
+            }
+
+            if (password.isEmpty()) {
+                view.showErrorMessage("Password is required");
+                return;
+            }
+
+            if (!password.equals(confirmPassword)) {
+                view.showErrorMessage("Passwords do not match");
+                return;
+            }
+
+            if (model.isUserExists(username)) {
+                view.showErrorMessage("Username already exists");
+                return;
+            }
+
+            model.registerUser(username, password);
+            view.showSuccessMessage("Registration successful!\nYou may login now.");
+            view.showLogin();
         }
     }
 
