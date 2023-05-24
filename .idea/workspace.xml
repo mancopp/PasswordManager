@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8082b027-fbbc-4d23-8f31-51a98b79f082" name="Changes" comment="Fix show/hide password state preservation issue&#10;&#10;The show/hide password state was incorrectly preserved between different password sessions. This commit fixes the issue and ensures that the state is reset correctly for each session.">
+    <list default="true" id="8082b027-fbbc-4d23-8f31-51a98b79f082" name="Changes" comment="Add Password History View and Related Updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PasswordObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PasswordObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PasswordViewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PasswordViewPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PasswordListPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PasswordListPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684932802652</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add Password History View and Related Updates">
+      <created>1684938727410</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1684938727410</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,6 +136,7 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Add MVC pattern" />
     <MESSAGE value="Fix show/hide password state preservation issue&#10;&#10;The show/hide password state was incorrectly preserved between different password sessions. This commit fixes the issue and ensures that the state is reset correctly for each session." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix show/hide password state preservation issue&#10;&#10;The show/hide password state was incorrectly preserved between different password sessions. This commit fixes the issue and ensures that the state is reset correctly for each session." />
+    <MESSAGE value="Add Password History View and Related Updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Password History View and Related Updates" />
   </component>
 </project>

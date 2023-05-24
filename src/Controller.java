@@ -1,11 +1,11 @@
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Controller {
     private Model model;
@@ -20,7 +20,7 @@ public class Controller {
         view.addRegRegisterButtonListener(new RegRegisterButtonListener());
         view.addRegBackButtonListener(new RegBackButtonListener());
 
-        view.passwordListCard.addListSelectionListener(new PasswordListPanelListSelectionListener());
+        view.passwordListCard.addListDoubleClickListener(new PasswordListPanelListDoubleClickListener());
 
         view.passwordViewCard.addCopyButtonListener(new CopyActionListener());
         view.passwordViewCard.addPasswordToggleButtonListener(new PasswordViewToggleButtonListener());
@@ -32,10 +32,10 @@ public class Controller {
         view.showLogin();
     }
 
-    private class PasswordListPanelListSelectionListener implements ListSelectionListener {
+    private class PasswordListPanelListDoubleClickListener extends MouseAdapter {
         @Override
-        public void valueChanged(ListSelectionEvent e) {
-            if (!e.getValueIsAdjusting()) {
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) {
                 Object source = e.getSource();
 
                 if (source instanceof JList) {

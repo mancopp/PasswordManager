@@ -1,18 +1,18 @@
 import javax.swing.*;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.util.*;
 import java.util.List;
 
 public class PasswordListPanel extends JPanel {
     private Map<String, PasswordObject> passwords;
     private JList<String> list;
-    private ListSelectionListener listSelectionListener;
+    private MouseAdapter listDoubleClickListener;
 
     public PasswordListPanel(){}
 
-    public void addListSelectionListener(ListSelectionListener listSelectionListener) {
-        this.listSelectionListener = listSelectionListener;
+    public void addListDoubleClickListener(MouseAdapter mouseAdapter) {
+        this.listDoubleClickListener = mouseAdapter;
     }
 
     public void setData(User user) {
@@ -33,7 +33,7 @@ public class PasswordListPanel extends JPanel {
         scrollPane.setPreferredSize(new Dimension(200, 200));
 
         // Add list selection listener to display the password
-        list.addListSelectionListener(listSelectionListener);
+        list.addMouseListener(listDoubleClickListener);
 
 
         JButton button = new JButton("+");
