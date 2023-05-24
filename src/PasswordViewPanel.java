@@ -76,9 +76,14 @@ public class PasswordViewPanel extends JPanel {
     }
 
     public void setData(PasswordObject password){
-        this.label.setText(password.getLabel());
-        this.username.setText(password.getUsername());
-        this.passwordField.setText(password.getPassword());
+
+        label.setText(password.getLabel());
+        username.setText(password.getUsername());
+        passwordField.setText(password.getPassword());
+
+        passwordField.setEchoChar(ECHO_CHAR);
+        passwordToggleButton.setSelected(false);
+        passwordToggleButton.setText("Show");
     }
 
     public String getDisplayedPassword(){

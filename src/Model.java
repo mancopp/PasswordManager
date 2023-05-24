@@ -28,10 +28,10 @@ public class Model {
     public Model() {
         userList = new ArrayList<>();
         User usr = new User("mncpp", "test");
-        usr.addPassword("google", "mancopp", "hello");
-        usr.addPassword("facebook", "mancopp", "hello");
-        usr.addPassword("instagram", "mancopp", "hello");
-        usr.addPassword("youtube", "mancopp", "hello");
+        usr.addPassword("Google", "Mancopp", "googlePass1");
+        usr.addPassword("Facebook", "Mancopp", "facebookPass1");
+        usr.addPassword("Instagram", "Mancopp", "instagramPass1");
+        usr.addPassword("Youtube", "Mancopp", "youtubePass12youtubePass12youtubePass12");
         userList.add(usr);
     }
 

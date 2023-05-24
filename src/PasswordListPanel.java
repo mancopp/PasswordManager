@@ -35,16 +35,21 @@ public class PasswordListPanel extends JPanel {
         // Add list selection listener to display the password
         list.addListSelectionListener(listSelectionListener);
 
-        // Create the sort method selection box
+
+        JButton button = new JButton("+");
+
         JComboBox<String> sortMethodComboBox = new JComboBox<>(new String[]{"By Date", "By Label", "By Times Used"});
         sortMethodComboBox.addActionListener(e -> {
             String selectedSortMethod = (String) sortMethodComboBox.getSelectedItem();
             sortPasswords(selectedSortMethod);
         });
 
-        // Add components to the panel
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.add(sortMethodComboBox, BorderLayout.CENTER);
+        topPanel.add(button, BorderLayout.LINE_END);
+
         add(scrollPane, BorderLayout.CENTER);
-        add(sortMethodComboBox, BorderLayout.NORTH);
+        add(topPanel, BorderLayout.NORTH);
     }
 
     private void sortPasswords(String sortMethod) {
