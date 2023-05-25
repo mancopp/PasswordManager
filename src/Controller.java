@@ -22,6 +22,7 @@ public class Controller {
         view.registerCard.addRegisterButtonListener(new RegisterRegisterButtonListener());
 
         view.passwordListCard.addListDoubleClickListener(new PasswordListPanelListDoubleClickListener());
+        view.passwordListCard.addAddButtonListener(new ListPanelAddButtonListener());
 
         view.passwordViewCard.addCopyButtonListener(new CopyActionListener());
         view.passwordViewCard.addPasswordToggleButtonListener(new PasswordViewToggleButtonListener());
@@ -29,6 +30,10 @@ public class Controller {
         view.passwordViewCard.addHistoryButtonListener(new HistoryButtonListener());
 
         view.passwordHistoryCard.addBackButtonListener(new HistoryPanelBackButtonListener());
+
+        view.passwordAddCard.addAddButtonListener(new AddPanelAddButtonListener());
+        view.passwordAddCard.addCancelButtonListener(new AddPanelCancelButtonListener());
+
 
         view.showLogin();
     }
@@ -74,12 +79,59 @@ public class Controller {
             view.showRegistrationForm();
         }
     }
+    private class ListPanelAddButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.showPasswordAdd();
+        }
+    }
+
+    private class AddPanelAddButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String label = view.passwordAddCard.getLabel().getText();
+            String username = view.passwordAddCard.getUsernameField().getText();
+            String password = new String(view.passwordAddCard.getPasswordField().getPassword());
+
+            if (label.isEmpty()) {
+                view.showErrorMessage("Label is required");
+                return;
+            }
+
+            if (username.isEmpty()) {
+                view.showErrorMessage("Username is required");
+                return;
+            }
+
+            if (password.isEmpty()) {
+                view.showErrorMessage("Password is required");
+                return;
+            }
+
+            if (model.getUserSession().isPasswordLabelExists(label)) {
+                view.showErrorMessage("Password record with that label already exists");
+                return;
+            }
+
+            model.getUserSession().addPassword(label, username, password);
+            view.showSuccessMessage("Password record added successfully");
+            view.showPasswordList(model.getUserSession());
+        }
+    }
+
+    private class AddPanelCancelButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.showPasswordList(model.getUserSession());
+        }
+    }
     private class RegisterCancelButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.showLogin();
         }
     }
+
     private class RegisterRegisterButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

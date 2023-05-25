@@ -36,4 +36,8 @@ public class User implements Serializable {
     public String getPassword() {
         return password;
     }
+
+    public boolean isPasswordLabelExists(String label) {
+        return passwords.containsKey(label);
+    }
 }

@@ -19,6 +19,7 @@ public class View {
     public PasswordListPanel passwordListCard = new PasswordListPanel();
     public PasswordHistoryPanel passwordHistoryCard = new PasswordHistoryPanel();
     public RegisterPanel registerCard = new RegisterPanel();
+    public PasswordAddPanel passwordAddCard = new PasswordAddPanel();
 
     public View() {
         frame = new JFrame("Login");
@@ -43,28 +44,12 @@ public class View {
         loginCard.add(loginButton);
         loginCard.add(registerButton);
 
-        // Registration card
-//        registerCard = new JPanel();
-//        JLabel regUsernameLabel = new JLabel("Username:");
-//        JLabel regPasswordLabel = new JLabel("Password:");
-//        regUsernameField = new JTextField(10);
-//        regPasswordField = new JPasswordField(10);
-//        regRegisterButton = new JButton("Register");
-//        regBackButton = new JButton("Back");
-
-//        registerCard.add(regUsernameLabel);
-//        registerCard.add(regUsernameField);
-//        registerCard.add(regPasswordLabel);
-//        registerCard.add(regPasswordField);
-//        registerCard.add(regRegisterButton);
-//        registerCard.add(regBackButton);
-
-        // Add cards to panel
         cards.add(loginCard, "login");
         cards.add(registerCard, "register");
         cards.add(passwordListCard, "passwordList");
         cards.add(passwordViewCard, "passwordView");
         cards.add(passwordHistoryCard, "passwordHistory");
+        cards.add(passwordAddCard, "passwordAdd");
 
         frame.getContentPane().add(cards);
         frame.pack();
@@ -120,6 +105,11 @@ public class View {
     public void showLogin() {
         frame.setTitle("Login");
         cardLayout.show(cards, "login");
+    }
+
+    public void showPasswordAdd() {
+        frame.setTitle("Add new password data");
+        cardLayout.show(cards, "passwordAdd");
     }
 
     public void showErrorMessage(String message) {

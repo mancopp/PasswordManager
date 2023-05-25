@@ -66,6 +66,4 @@ public class Model {
         }
         return false;
     }
-
-    // Other methods for managing user data
 }

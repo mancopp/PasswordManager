@@ -1,23 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.util.*;
 import java.util.List;
 
 public class PasswordListPanel extends JPanel {
-    private Map<String, PasswordObject> passwords;
+    private String selectedSortMethod = "By Date";
+    private Map<String, PasswordObject> passwords = new HashMap<String, PasswordObject>();
     private JList<String> list;
     private MouseAdapter listDoubleClickListener;
+    private JButton addButton;
 
-    public PasswordListPanel(){}
-
-    public void addListDoubleClickListener(MouseAdapter mouseAdapter) {
-        this.listDoubleClickListener = mouseAdapter;
-    }
-
-    public void setData(User user) {
-        Map<String, PasswordObject> passwords = user.getPasswords();
-        this.passwords = passwords;
+    public PasswordListPanel(){
         setLayout(new BorderLayout());
 
         DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -30,22 +25,34 @@ public class PasswordListPanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(list);
         scrollPane.setPreferredSize(new Dimension(200, 200));
 
-        list.addMouseListener(listDoubleClickListener);
-
-        JButton button = new JButton("+");
-
         JComboBox<String> sortMethodComboBox = new JComboBox<>(new String[]{"By Date", "By Label", "By Times Used"});
         sortMethodComboBox.addActionListener(e -> {
-            String selectedSortMethod = (String) sortMethodComboBox.getSelectedItem();
+            selectedSortMethod = (String) sortMethodComboBox.getSelectedItem();
             sortPasswords(selectedSortMethod);
         });
 
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.add(sortMethodComboBox, BorderLayout.CENTER);
-        topPanel.add(button, BorderLayout.LINE_END);
+
+        addButton = new JButton("+");
+        topPanel.add(addButton, BorderLayout.LINE_END);
 
         add(scrollPane, BorderLayout.CENTER);
         add(topPanel, BorderLayout.NORTH);
+    }
+
+    public void setData(User user) {
+        passwords = user.getPasswords();
+        list.addMouseListener(listDoubleClickListener);
+        sortPasswords(selectedSortMethod);
+    }
+
+    public void addListDoubleClickListener(MouseAdapter mouseAdapter) {
+        listDoubleClickListener = mouseAdapter;
+    }
+
+    public void addAddButtonListener(ActionListener listener) {
+        addButton.addActionListener(listener);
     }
 
     private void sortPasswords(String sortMethod) {
@@ -68,4 +75,5 @@ public class PasswordListPanel extends JPanel {
             listModel.addElement(entry.getKey());
         }
     }
+
 }
