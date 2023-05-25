@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Date;
 
 public class Controller {
     private Model model;
@@ -114,7 +113,7 @@ public class Controller {
                 return;
             }
 
-            model.getUserSession().addPassword(label, username, password);
+            model.addPasswordRecordToCurrentUser(label, username, password);
             view.showSuccessMessage("Password record added successfully");
             view.showPasswordList(model.getUserSession());
         }
@@ -206,18 +205,6 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.passwordViewCard.handleToggleButtonPressed();
-        }
-    }
-
-    private class RegRegisterButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String username = view.getRegUsername();
-            String password = view.getRegPassword();
-
-            model.registerUser(username, password);
-            view.showLogin();
-            view.showErrorMessage("Registration successful");
         }
     }
 

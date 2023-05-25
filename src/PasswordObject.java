@@ -8,31 +8,17 @@ class PasswordObject implements Serializable {
     private String username;
     private String password;
     private Date dateCreated;
-
-    public List<Date> getUsedDates() {
-        return usedDates;
-    }
-
     private List<Date> usedDates;
-
-    public Date getLastUsed() {
-        return lastUsed;
-    }
-
     private Date lastUsed;
     private int timesUsed;
 
     public PasswordObject(String label, String username, String password) {
-        this.usedDates = new ArrayList<Date>();
         this.label = label;
         this.username = username;
         this.password = password;
         this.dateCreated = new Date();
+        this.usedDates = new ArrayList<>();
         this.timesUsed = 0;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
     }
 
     public String getLabel() {
@@ -43,8 +29,20 @@ class PasswordObject implements Serializable {
         return username;
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return password;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public List<Date> getUsedDates() {
+        return usedDates;
+    }
+
+    public Date getLastUsed() {
+        return lastUsed;
     }
 
     public int getTimesUsed() {

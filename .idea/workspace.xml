@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8082b027-fbbc-4d23-8f31-51a98b79f082" name="Changes" comment="Add panel for adding new password record">
+    <list default="true" id="8082b027-fbbc-4d23-8f31-51a98b79f082" name="Changes" comment="Fix double-click issue causing incorrect times used and data list in PasswordObject">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PasswordListPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PasswordListPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PasswordObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PasswordObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +82,7 @@
       <workItem from="1684608744804" duration="11140000" />
       <workItem from="1684741057714" duration="941000" />
       <workItem from="1684911456328" duration="13951000" />
-      <workItem from="1685022288774" duration="2271000" />
+      <workItem from="1685022288774" duration="13731000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1684412061561</created>
@@ -131,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685022534261</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Fix double-click issue causing incorrect times used and data list in PasswordObject">
+      <created>1685024578985</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1685024578985</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,6 +182,7 @@
     <MESSAGE value="Add double-click listener for password selection in list" />
     <MESSAGE value="Add registration panel and success message display functionality" />
     <MESSAGE value="Add panel for adding new password record" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add panel for adding new password record" />
+    <MESSAGE value="Fix double-click issue causing incorrect times used and data list in PasswordObject" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix double-click issue causing incorrect times used and data list in PasswordObject" />
   </component>
 </project>
