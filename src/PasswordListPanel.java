@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.util.*;
 import java.util.List;
 
@@ -9,7 +10,6 @@ public class PasswordListPanel extends JPanel {
     private String selectedSortMethod = "By Date";
     private Map<String, PasswordObject> passwords = new HashMap<String, PasswordObject>();
     private JList<String> list;
-    private MouseAdapter listDoubleClickListener;
     private JButton addButton;
 
     public PasswordListPanel(){
@@ -43,12 +43,11 @@ public class PasswordListPanel extends JPanel {
 
     public void setData(User user) {
         passwords = user.getPasswords();
-        list.addMouseListener(listDoubleClickListener);
         sortPasswords(selectedSortMethod);
     }
 
     public void addListDoubleClickListener(MouseAdapter mouseAdapter) {
-        listDoubleClickListener = mouseAdapter;
+        list.addMouseListener(mouseAdapter);
     }
 
     public void addAddButtonListener(ActionListener listener) {
