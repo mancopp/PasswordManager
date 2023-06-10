@@ -27,12 +27,13 @@ public class Controller {
         view.passwordViewCard.addCopyButtonListener(new CopyActionListener());
         view.passwordViewCard.addPasswordToggleButtonListener(new PasswordViewToggleButtonListener());
         view.passwordViewCard.addBackButtonListener(new ViewPanelBackButtonListener());
+        view.passwordViewCard.addEditButtonListener(new ViewPanelEditButtonListener());
         view.passwordViewCard.addHistoryButtonListener(new HistoryButtonListener());
 
         view.passwordHistoryCard.addBackButtonListener(new HistoryPanelBackButtonListener());
 
-        view.passwordAddCard.addAddButtonListener(new AddPanelAddButtonListener());
-        view.passwordAddCard.addCancelButtonListener(new AddPanelCancelButtonListener());
+        view.passwordFormCard.addAddButtonListener(new AddPanelAddButtonListener());
+        view.passwordFormCard.addCancelButtonListener(new AddPanelCancelButtonListener());
 
 
         view.showLogin();
@@ -82,16 +83,17 @@ public class Controller {
     private class ListPanelAddButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.showPasswordAdd();
+            view.passwordFormCard.setAddMode();
+            view.showPasswordForm();
         }
     }
 
     private class AddPanelAddButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String label = view.passwordAddCard.getLabel().getText();
-            String username = view.passwordAddCard.getUsernameField().getText();
-            String password = new String(view.passwordAddCard.getPasswordField().getPassword());
+            String label = view.passwordFormCard.getLabel().getText();
+            String username = view.passwordFormCard.getUsernameField().getText();
+            String password = new String(view.passwordFormCard.getPasswordField().getPassword());
 
             if (label.isEmpty()) {
                 view.showErrorMessage("Label is required");
@@ -108,13 +110,19 @@ public class Controller {
                 return;
             }
 
-            if (model.getUserSession().isPasswordLabelExists(label)) {
-                view.showErrorMessage("Password record with that label already exists");
-                return;
-            }
+            String oldLabel = view.passwordFormCard.getOldLabel();
+            if(oldLabel != null){
+                model.updateCurrentUserPassword(oldLabel, label, username, password);
+                view.showSuccessMessage("Password record updated successfully");
+            }else{
+                if (model.getUserSession().isPasswordLabelExists(label)) {
+                    view.showErrorMessage("Password record with that label already exists");
+                    return;
+                }
 
-            model.addPasswordRecordToCurrentUser(label, username, password);
-            view.showSuccessMessage("Password record added successfully");
+                model.addPasswordRecordToCurrentUser(label, username, password);
+                view.showSuccessMessage("Password record added successfully");
+            }
             view.showPasswordList(model.getUserSession());
         }
     }
@@ -176,6 +184,15 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.showPasswordList(model.getUserSession());
+        }
+    }
+
+    private class ViewPanelEditButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            PasswordObject currentPassword = model.getPasswordSession();
+            view.passwordFormCard.setEditMode(currentPassword.getLabel(), currentPassword.getUsername(), currentPassword.getPassword());
+            view.showPasswordForm();
         }
     }
 

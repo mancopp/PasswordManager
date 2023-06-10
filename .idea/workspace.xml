@@ -8,8 +8,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PasswordAddPanel.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PasswordObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PasswordObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PasswordViewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PasswordViewPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +86,8 @@
       <workItem from="1684741057714" duration="941000" />
       <workItem from="1684911456328" duration="13951000" />
       <workItem from="1685022288774" duration="13731000" />
+      <workItem from="1686416559128" duration="50000" />
+      <workItem from="1686416621739" duration="66000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1684412061561</created>

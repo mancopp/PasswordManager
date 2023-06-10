@@ -121,6 +121,10 @@ public class PasswordViewPanel extends JPanel {
         backButton.addActionListener(listener);
     }
 
+    public void addEditButtonListener(ActionListener listener) {
+        editButton.addActionListener(listener);
+    }
+
     public void addHistoryButtonListener(ActionListener listener) {
         historyButton.addActionListener(listener);
     }

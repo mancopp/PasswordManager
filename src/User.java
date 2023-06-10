@@ -18,6 +18,19 @@ public class User implements Serializable {
         return pwd;
     }
 
+    public void updatePassword(String label, String newLabel, String newUsername, String newPassword){
+        PasswordObject passwordObject = getPasswordByLabel(label);
+
+        passwordObject.setLabel(newLabel);
+        passwordObject.setUsername(newUsername);
+        passwordObject.setPassword(newPassword);
+
+        passwords.put(newLabel, passwordObject);
+        if (!newLabel.equals(label)) {
+            passwords.remove(label);
+        }
+    }
+
     public PasswordObject getPasswordByLabel(String label) {
         return passwords.get(label);
     }

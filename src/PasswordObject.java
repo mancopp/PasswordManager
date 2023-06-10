@@ -4,6 +4,18 @@ import java.util.Date;
 import java.util.List;
 
 class PasswordObject implements Serializable {
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     private String label;
     private String username;
     private String password;

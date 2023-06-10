@@ -2,7 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class PasswordAddPanel extends JPanel {
+public class PasswordFormPanel extends JPanel {
+    private String oldLabel;
     private JButton addButton;
     private JTextField usernameField;
 
@@ -22,7 +23,7 @@ public class PasswordAddPanel extends JPanel {
     private JTextField label;
     private JPasswordField passwordField;
 
-    public PasswordAddPanel() {
+    public PasswordFormPanel() {
         setLayout(new BorderLayout());
 
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -55,6 +56,22 @@ public class PasswordAddPanel extends JPanel {
         add(contentPanel, BorderLayout.CENTER);
     }
 
+    public void setEditMode(String label, String username, String password){
+        oldLabel = label;
+        setFieldData(label, username, password);
+    }
+
+    public void setAddMode(){
+        oldLabel = null;
+        setFieldData(null, null, null);
+    }
+
+    private void setFieldData(String label, String username, String password){
+        this.label.setText(label);
+        usernameField.setText(username);
+        passwordField.setText(password);
+    }
+
     public void addAddButtonListener(ActionListener listener) {
         addButton.addActionListener(listener);
     }
@@ -63,4 +80,7 @@ public class PasswordAddPanel extends JPanel {
         cancelButton.addActionListener(listener);
     }
 
+    public String getOldLabel() {
+        return oldLabel;
+    }
 }

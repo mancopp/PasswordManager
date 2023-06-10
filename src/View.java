@@ -19,7 +19,7 @@ public class View {
     public PasswordListPanel passwordListCard = new PasswordListPanel();
     public PasswordHistoryPanel passwordHistoryCard = new PasswordHistoryPanel();
     public RegisterPanel registerCard = new RegisterPanel();
-    public PasswordAddPanel passwordAddCard = new PasswordAddPanel();
+    public PasswordFormPanel passwordFormCard = new PasswordFormPanel();
 
     public View() {
         frame = new JFrame("Login");
@@ -49,7 +49,7 @@ public class View {
         cards.add(passwordListCard, "passwordList");
         cards.add(passwordViewCard, "passwordView");
         cards.add(passwordHistoryCard, "passwordHistory");
-        cards.add(passwordAddCard, "passwordAdd");
+        cards.add(passwordFormCard, "passwordForm");
 
         frame.getContentPane().add(cards);
         frame.pack();
@@ -107,9 +107,9 @@ public class View {
         cardLayout.show(cards, "login");
     }
 
-    public void showPasswordAdd() {
+    public void showPasswordForm() {
         frame.setTitle("Add new password data");
-        cardLayout.show(cards, "passwordAdd");
+        cardLayout.show(cards, "passwordForm");
     }
 
     public void showErrorMessage(String message) {

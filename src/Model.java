@@ -53,6 +53,10 @@ public class Model {
         return false;
     }
 
+    public void updateCurrentUserPassword(String label, String newLabel, String newUsername, String newPassword) {
+        userSession.updatePassword(label, newLabel, newUsername, newPassword);
+    }
+
     public User getUserByUsername(String username) {
         for (User user : userList) {
             if (user.getUsername().equals(username)) {
