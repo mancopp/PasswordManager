@@ -66,33 +66,6 @@ public class Model {
         return null;
     }
 
-    public void printUserList() {
-        for (User user : userList) {
-            System.out.println("Username: " + user.getUsername());
-            System.out.println("Password: " + user.getPassword());
-
-            Map<String, PasswordObject> passwords = user.getPasswords();
-            for (Map.Entry<String, PasswordObject> entry : passwords.entrySet()) {
-                String label = entry.getKey();
-                PasswordObject passwordObject = entry.getValue();
-
-                System.out.println("Label: " + label);
-                System.out.println("Username: " + passwordObject.getUsername());
-                System.out.println("Password: " + passwordObject.getPassword());
-
-                List<Date> usedDates = passwordObject.getUsedDates();
-                System.out.println("Used Dates:");
-                for (Date usedDate : usedDates) {
-                    System.out.println(usedDate);
-                }
-
-                System.out.println();
-            }
-
-            System.out.println("--------");
-        }
-    }
-
     public void registerUser(String username, String password) {
         User user = new User(username, password);
         userList.add(user);
@@ -115,39 +88,35 @@ public class Model {
                 file.createNewFile();
             }
 
-            FileInputStream fis = new FileInputStream(file);
             Cipher cipher = getCipher(Cipher.DECRYPT_MODE);
 
-            CipherInputStream cis = new CipherInputStream(fis, cipher);
-            ObjectInputStream ois = new ObjectInputStream(cis);
+            try (FileInputStream fis = new FileInputStream(file);
+                 CipherInputStream cis = new CipherInputStream(fis, cipher);
+                 ObjectInputStream ois = new ObjectInputStream(cis)) {
 
-            userList = (List<User>) ois.readObject();
-
-            ois.close();
-            cis.close();
-            fis.close();
+                userList = (List<User>) ois.readObject();
+            }
         } catch (IOException | ClassNotFoundException | NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException e) {
             e.printStackTrace();
         }
     }
 
+
     public void saveUsers() {
         try {
-            FileOutputStream fos = new FileOutputStream(FILE_PATH);
             Cipher cipher = getCipher(Cipher.ENCRYPT_MODE);
 
-            CipherOutputStream cos = new CipherOutputStream(fos, cipher);
-            ObjectOutputStream oos = new ObjectOutputStream(cos);
+            try (FileOutputStream fos = new FileOutputStream(FILE_PATH);
+                 CipherOutputStream cos = new CipherOutputStream(fos, cipher);
+                 ObjectOutputStream oos = new ObjectOutputStream(cos)) {
 
-            oos.writeObject(userList);
-
-            oos.close();
-            cos.close();
-            fos.close();
+                oos.writeObject(userList);
+            }
         } catch (IOException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
             e.printStackTrace();
         }
     }
+
 
     private Cipher getCipher(int cipherMode) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
         SecretKeySpec secretKey = new SecretKeySpec(SECRET_KEY.getBytes(), "AES");

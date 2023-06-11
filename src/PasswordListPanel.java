@@ -58,14 +58,19 @@ public class PasswordListPanel extends JPanel {
         List<Map.Entry<String, PasswordObject>> sortedList = new ArrayList<>(passwords.entrySet());
         switch (sortMethod) {
             case "By Date":
-                Collections.sort(sortedList, Comparator.comparing(entry -> entry.getValue().getDateCreated()));
+                sortedList.sort(Comparator.comparing(entry -> {
+                    Date lastUsed = ((Map.Entry<?, PasswordObject>) entry).getValue().getLastUsed();
+                    return lastUsed != null ? lastUsed : new Date(0);
+                }).reversed());
                 break;
             case "By Label":
-                Collections.sort(sortedList, Comparator.comparing(Map.Entry::getKey));
+                sortedList.sort(Map.Entry.comparingByKey(String.CASE_INSENSITIVE_ORDER));
                 break;
             case "By Times Used":
-                Collections.sort(sortedList, Comparator.comparingInt(entry -> entry.getValue().getTimesUsed()));
+                sortedList.sort(Comparator.comparingInt(entry -> ((Map.Entry<?, PasswordObject>) entry).getValue().getTimesUsed()).reversed());
                 break;
+            default:
+                Collections.sort(sortedList, Comparator.comparing(entry -> entry.getValue().getDateCreated()));
         }
 
         DefaultListModel<String> listModel = (DefaultListModel<String>) list.getModel();

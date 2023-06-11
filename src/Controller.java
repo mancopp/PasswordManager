@@ -46,7 +46,7 @@ public class Controller {
                 Object source = e.getSource();
 
                 if (source instanceof JList) {
-                    JList list = (JList) source;
+                    JList<String> list = (JList<String>) source;
                     int selectedIndex = list.getSelectedIndex();
 
                     if (selectedIndex != -1) {
@@ -222,13 +222,6 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.passwordViewCard.handleToggleButtonPressed();
-        }
-    }
-
-    private class RegBackButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            view.showLogin();
         }
     }
 
