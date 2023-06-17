@@ -5,6 +5,10 @@ import java.awt.event.ActionListener;
 
 public class View {
     private JFrame frame;
+
+    public void setFrameVisible(boolean bool){
+        frame.setVisible(bool);
+    }
     private JPanel cards;
     private JTextField usernameField;
     private JPasswordField passwordField;
@@ -15,6 +19,8 @@ public class View {
     private JButton regRegisterButton;
     private JButton regBackButton;
     private CardLayout cardLayout = new CardLayout();
+
+    public SettingsPanel settingsCard = new SettingsPanel();
     public PasswordViewPanel passwordViewCard = new PasswordViewPanel();
     public PasswordListPanel passwordListCard = new PasswordListPanel();
     public PasswordHistoryPanel passwordHistoryCard = new PasswordHistoryPanel();
@@ -45,6 +51,7 @@ public class View {
         loginCard.add(registerButton);
 
         cards.add(loginCard, "login");
+        cards.add(settingsCard, "settings");
         cards.add(registerCard, "register");
         cards.add(passwordListCard, "passwordList");
         cards.add(passwordViewCard, "passwordView");
@@ -53,7 +60,7 @@ public class View {
 
         frame.getContentPane().add(cards);
         frame.pack();
-        frame.setVisible(true);
+        //frame.setVisible(true);
     }
 
     public String getUsername() {
@@ -80,6 +87,10 @@ public class View {
         registerButton.addActionListener(listener);
     }
 
+    public void showSettings() {
+//        frame.setTitle("s passwords");
+        cardLayout.show(cards, "settings");
+    }
     public void showPasswordList(User data) {
         frame.setTitle(data.getUsername() + "'s passwords");
         passwordListCard.setData(data);
@@ -107,8 +118,8 @@ public class View {
         cardLayout.show(cards, "login");
     }
 
-    public void showPasswordForm() {
-        frame.setTitle("Add new password data");
+    public void showPasswordForm(String title) {
+        frame.setTitle(title);
         cardLayout.show(cards, "passwordForm");
     }
 

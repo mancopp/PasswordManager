@@ -1,21 +1,15 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javax.crypto.*;
-import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.NoSuchAlgorithmException;
+import java.security.*;
 import java.util.*;
 
 public class Model {
 
-    private static final String DIRECTORY_PATH = System.getProperty("user.home") + "/Documents/PasswordManager";
-    private static final String FILE_PATH = DIRECTORY_PATH + "/users.dat";
-    private static final String SECRET_KEY = "ThisIsASecretKey";
+    public static final String DIRECTORY_PATH = System.getProperty("user.home") + "/Documents/PasswordManager";
     private List<User> userList = new ArrayList<>();
 
     public User getUserSession() {
@@ -27,6 +21,35 @@ public class Model {
     }
 
     private User userSession;
+
+    private String encryption_algorithm = "AES";
+    private String secretKey;
+
+    private static class KeyAlg {
+        private String key;
+        private String alg;
+
+        public KeyAlg(String key, String alg) {
+            this.key = key;
+            this.alg = alg;
+        }
+
+        public String getKey() {
+            return key;
+        }
+
+        public void setKey(String key) {
+            this.key = key;
+        }
+
+        public String getAlg() {
+            return alg;
+        }
+
+        public void setAlg(String alg) {
+            this.alg = alg;
+        }
+    }
 
     public PasswordObject getPasswordSession() {
         return passwordSession;
@@ -41,7 +64,7 @@ public class Model {
     private PasswordObject passwordSession;
 
     public Model() {
-        loadUsers();
+        //loadUsers();
     }
 
     public boolean authenticateUser(String username, String password) {
@@ -81,9 +104,19 @@ public class Model {
         return false;
     }
 
+    public boolean encryptionDataExists() {
+        File file = new File(DIRECTORY_PATH + "/data.json");
+        return file.exists();
+    }
+
+    public boolean usersDataExists() {
+        File file = new File(DIRECTORY_PATH + "/users.dat");
+        return file.exists();
+    }
+
     public void loadUsers() {
         try {
-            File file = new File(FILE_PATH);
+            File file = new File(DIRECTORY_PATH + "/users.dat");
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -106,7 +139,7 @@ public class Model {
         try {
             Cipher cipher = getCipher(Cipher.ENCRYPT_MODE);
 
-            try (FileOutputStream fos = new FileOutputStream(FILE_PATH);
+            try (FileOutputStream fos = new FileOutputStream(DIRECTORY_PATH + "/users.dat");
                  CipherOutputStream cos = new CipherOutputStream(fos, cipher);
                  ObjectOutputStream oos = new ObjectOutputStream(cos)) {
 
@@ -117,12 +150,49 @@ public class Model {
         }
     }
 
+    public void saveEncryptionData() {
+        KeyAlg keyAlg = new KeyAlg(secretKey, encryption_algorithm);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String jsonString = gson.toJson(keyAlg);
+
+        try (FileWriter writer = new FileWriter(DIRECTORY_PATH + "/data.json")) {
+            writer.write(jsonString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadEncryptionData() {
+        try (FileReader reader = new FileReader(DIRECTORY_PATH + "/data.json")) {
+            Gson gson = new GsonBuilder().create();
+            KeyAlg keyAlg = gson.fromJson(reader, KeyAlg.class);
+
+            secretKey = keyAlg.getKey();
+            encryption_algorithm = keyAlg.getAlg();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private Cipher getCipher(int cipherMode) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
-        SecretKeySpec secretKey = new SecretKeySpec(SECRET_KEY.getBytes(), "AES");
-        Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(cipherMode, secretKey);
-        return cipher;
+            SecretKeySpec secretKey = new SecretKeySpec(this.secretKey.getBytes(), encryption_algorithm);
+            Cipher cipher = Cipher.getInstance(encryption_algorithm);
+            cipher.init(cipherMode, secretKey);
+            return cipher;
+    }
+
+    public String generateSecretKey(int keyLength) {
+        SecureRandom secureRandom = new SecureRandom();
+        byte[] keyBytes = new byte[keyLength / 8];
+        secureRandom.nextBytes(keyBytes);
+        return Base64.getEncoder().encodeToString(keyBytes);
+    }
+
+    public void setEncryption(String alg, String key){
+        encryption_algorithm = alg;
+        secretKey = key;
+        saveEncryptionData();
     }
 
     public void addPasswordRecordToCurrentUser(String label, String username, String password) {

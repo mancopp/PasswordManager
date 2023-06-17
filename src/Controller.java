@@ -35,8 +35,22 @@ public class Controller {
         view.passwordFormCard.addAddButtonListener(new AddPanelAddButtonListener());
         view.passwordFormCard.addCancelButtonListener(new AddPanelCancelButtonListener());
 
+        view.settingsCard.addGenerateButtonListener(new SettingsGenerateButtonListener());
+        view.settingsCard.addSaveButtonListener(new SettingsSaveButtonListener());
 
-        view.showLogin();
+        if(model.encryptionDataExists()){
+            model.loadEncryptionData();
+            model.loadUsers();
+            view.setFrameVisible(true);
+            view.showLogin();
+        }else{
+            if(model.usersDataExists()){
+                JOptionPane.showMessageDialog(null, "Seems like you have stored passwords in the past, but there is no data.json file with you secret key.\nIf you have it, please move it to " + model.DIRECTORY_PATH + ".\nIf you want to start over (You'll lose your data!), just delete the file\n" + model.DIRECTORY_PATH + "/users.dat" , "Secret key was not found", JOptionPane.ERROR_MESSAGE);
+            }else{
+                view.setFrameVisible(true);
+                view.showSettings();
+            }
+        }
     }
 
     private class PasswordListPanelListDoubleClickListener extends MouseAdapter {
@@ -80,11 +94,29 @@ public class Controller {
             view.showRegistrationForm();
         }
     }
+
+    private class SettingsGenerateButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String key = model.generateSecretKey(256);
+            view.settingsCard.setSecretKeyTextField(key);
+        }
+    }
+        private class SettingsSaveButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String algorithm = view.settingsCard.getAlgorithmDropdownText();
+            String key = view.settingsCard.getSecretKeyTextFieldText();
+
+            model.setEncryption(algorithm, key);
+            view.showRegistrationForm();
+        }
+    }
     private class ListPanelAddButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.passwordFormCard.setAddMode();
-            view.showPasswordForm();
+            view.showPasswordForm("Add new password data");
         }
     }
 
@@ -192,7 +224,7 @@ public class Controller {
         public void actionPerformed(ActionEvent e) {
             PasswordObject currentPassword = model.getPasswordSession();
             view.passwordFormCard.setEditMode(currentPassword.getLabel(), currentPassword.getUsername(), currentPassword.getPassword());
-            view.showPasswordForm();
+            view.showPasswordForm("Edit password data");
         }
     }
 
