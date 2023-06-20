@@ -1,3 +1,9 @@
+package Controller;
+
+import Model.Model;
+import Model.PasswordObject;
+import View.View;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;

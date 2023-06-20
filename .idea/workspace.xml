@@ -4,20 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8082b027-fbbc-4d23-8f31-51a98b79f082" name="Changes" comment="Fix sorting functions for sorting by different values">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_10_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/3/13b4a3d08a528b595fb8f3c27a7f02718051e2b4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/8/8/88a9255124c95bdc913197c120a8d560edc59c8e" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/9/a/9a552b7463857614c644729955e46839d2c91ae0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/9/c/9c27d43556258bdbb1b76555b172bfaf06253d8f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/9/f/9fe84ebb15faf917b7def6236dba604453cc61e0" afterDir="false" />
+    <list default="true" id="8082b027-fbbc-4d23-8f31-51a98b79f082" name="Changes" comment="Refactored encryption key handling and added algorithm choice&#10;&#10;This commit encompasses multiple changes related to the encryption functionality. It includes the removal of the hardcoded secret key, the addition of a new functionality to generate and store the key as JSON, and the implementation of the ability to choose between encryption algorithms &quot;blowfish&quot; and &quot;AES&quot;. This commit improves the security and flexibility of the encryption feature.">
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/9/a/9a552b7463857614c644729955e46839d2c91ae0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/9/c/9c27d43556258bdbb1b76555b172bfaf06253d8f" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PasswordManager.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PasswordManager.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PasswordListPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PasswordListPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PasswordFormPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/PasswordFormPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PasswordHistoryPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/PasswordHistoryPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PasswordListPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/PasswordListPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PasswordObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/PasswordObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PasswordViewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/PasswordViewPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RegisterPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/RegisterPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SettingsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/SettingsPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/View.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,36 +43,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="Controller" />
+      <recent name="Model" />
+      <recent name="View" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.Controller">
     <configuration name="Controller" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Controller" />
+      <option name="MAIN_CLASS_NAME" value="Controller.Controller" />
       <module name="PasswordManager" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -122,7 +130,11 @@
       <workItem from="1686484696807" duration="7650000" />
       <workItem from="1686554501880" duration="3231000" />
       <workItem from="1686829043342" duration="2837000" />
-      <workItem from="1687005878032" duration="8402000" />
+      <workItem from="1687005878032" duration="8546000" />
+      <workItem from="1687159386845" duration="404000" />
+      <workItem from="1687160010547" duration="948000" />
+      <workItem from="1687274861609" duration="300000" />
+      <workItem from="1687278857865" duration="2191000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1684412061561</created>
@@ -194,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686487364294</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Refactored encryption key handling and added algorithm choice&#10;&#10;This commit encompasses multiple changes related to the encryption functionality. It includes the removal of the hardcoded secret key, the addition of a new functionality to generate and store the key as JSON, and the implementation of the ability to choose between encryption algorithms &quot;blowfish&quot; and &quot;AES&quot;. This commit improves the security and flexibility of the encryption feature.">
+      <created>1687017698757</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1687017698757</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,6 +259,7 @@
     <MESSAGE value="Add passwordObject editing functionality and updated passwordAddPanel to passwordFormPanel" />
     <MESSAGE value="Fix bugs and address static code analyzer suggestions" />
     <MESSAGE value="Fix password sorting and resolved minor bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix password sorting and resolved minor bugs" />
+    <MESSAGE value="Refactored encryption key handling and added algorithm choice&#10;&#10;This commit encompasses multiple changes related to the encryption functionality. It includes the removal of the hardcoded secret key, the addition of a new functionality to generate and store the key as JSON, and the implementation of the ability to choose between encryption algorithms &quot;blowfish&quot; and &quot;AES&quot;. This commit improves the security and flexibility of the encryption feature." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored encryption key handling and added algorithm choice&#10;&#10;This commit encompasses multiple changes related to the encryption functionality. It includes the removal of the hardcoded secret key, the addition of a new functionality to generate and store the key as JSON, and the implementation of the ability to choose between encryption algorithms &quot;blowfish&quot; and &quot;AES&quot;. This commit improves the security and flexibility of the encryption feature." />
   </component>
 </project>

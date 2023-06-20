@@ -1,9 +1,11 @@
+package Model;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-class PasswordObject implements Serializable {
+public class PasswordObject implements Serializable {
     public void setLabel(String label) {
         this.label = label;
     }

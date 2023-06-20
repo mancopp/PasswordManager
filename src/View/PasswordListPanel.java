@@ -1,3 +1,8 @@
+package View;
+
+import Model.PasswordObject;
+import Model.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;

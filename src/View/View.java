@@ -1,5 +1,9 @@
+package View;
+
+import Model.PasswordObject;
+import Model.User;
+
 import javax.swing.*;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -88,7 +92,7 @@ public class View {
     }
 
     public void showSettings() {
-//        frame.setTitle("s passwords");
+        frame.setTitle("Setting up");
         cardLayout.show(cards, "settings");
     }
     public void showPasswordList(User data) {

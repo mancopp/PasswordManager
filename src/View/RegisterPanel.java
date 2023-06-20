@@ -1,3 +1,5 @@
+package View;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -24,12 +26,10 @@ public class RegisterPanel extends JPanel {
     public RegisterPanel() {
         setLayout(new BorderLayout());
 
-        // Create top panel with cancel button
         JPanel topPanel = new JPanel();
         cancelButton = new JButton("Cancel");
         topPanel.add(cancelButton);
 
-        // Create center panel with registration content
         JPanel centerPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.WEST;
@@ -66,7 +66,6 @@ public class RegisterPanel extends JPanel {
         gbc.insets = new Insets(10, 0, 0, 0);
         centerPanel.add(registerButton, gbc);
 
-        // Add panels to the main panel
         add(topPanel, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
     }
